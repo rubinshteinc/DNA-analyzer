@@ -3,10 +3,22 @@
 #include <vector>
 #include <string>
 
-class Parsing{
+class Parser{
 public:
-    std::vector<std::string> parserInput(std::string input);
+    void parserInput(std::string input);
+    std::string getCommand()const{ return m_params[0];}
+
+protected:
+    std::vector<std::string> m_params;
 };
 
+class NewParser :public Parser {
+public:
+    static bool properCommand();
+    static void prepareCommand();
 
+private:
+    static size_t countName;
+};
 #endif //DNA___ANALYZER_PARSING_H
+

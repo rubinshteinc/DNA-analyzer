@@ -5,6 +5,7 @@
 #include "meta_data.h"
 class New :public ICommand{
 public:
+    New();
     ~New(){}
     ICommand* create(){New *newCommand = new New(); return newCommand;}
     MetaData* exe(std::string seq, std::string name);
