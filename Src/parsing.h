@@ -5,8 +5,10 @@
 
 class Parser{
 public:
-    void parserInput(std::string input);
+    void parserInput(std::string &input);
     std::string getCommand()const{ return m_params[0];}
+    std::string getSeq()const{ return m_params[1];}
+    std::string getName()const{ return m_params[2];}
 
 protected:
     std::vector<std::string> m_params;
@@ -14,8 +16,8 @@ protected:
 
 class NewParser :public Parser {
 public:
-    static bool properCommand();
-    static void prepareCommand();
+    bool properCommand();
+    void prepareCommand();
 
 private:
     static size_t countName;

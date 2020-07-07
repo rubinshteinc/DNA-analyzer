@@ -5,6 +5,6 @@
 #include "new_command.h"
 class FactoryCLI{
 public:
-    ICommand* managementCLI(std::string command);
+    static ICommand* managementCLI(Parser &parser);
 };
 #endif //DNA___ANALYZER_FACTORYCOMMAND_H

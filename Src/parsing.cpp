@@ -4,7 +4,7 @@
 #include <vector>
 size_t NewParser::countName = 1;
 
-void Parser::parserInput(std::string input){
+void Parser::parserInput(std::string &input){
     std::vector<std::string> params;
     std::istringstream iss(input);
     copy(std::istream_iterator<std::string>(iss),
@@ -13,9 +13,7 @@ void Parser::parserInput(std::string input){
 
 }
 bool NewParser::properCommand(){
-    if(m_params.size() < 2 or m_params.size() > 3){
-        throw ; //complete specific exception
-    }
+    return !(m_params.size() < 2 or m_params.size() > 3);
 
 }
 void NewParser::prepareCommand(){

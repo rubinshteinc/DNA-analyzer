@@ -1,10 +1,10 @@
 #include "factory_command.h"
 
 
-ICommand* FactoryCLI::managementCLI(std::string command) {
-    ICommand *icommand = NULL;
-    if("new" == command){
-        icommand = new New;
+ICommand* FactoryCLI::managementCLI(Parser &parser) {
+    ICommand *pICommand = NULL;
+    if("new" == parser.getCommand()){
+        pICommand = new New(parser);
     }
-    return icommand;
+    return pICommand;
 }
