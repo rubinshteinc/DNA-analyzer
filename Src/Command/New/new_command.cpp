@@ -1,6 +1,6 @@
 #include "new_command.h"
-#include "../parsing.h"
-#include "../app.h"
+#include "../../app.h"
+#include "new_parser.h"
 
 
 New::New(Parser *parser){
@@ -17,7 +17,7 @@ New::New(Parser *parser){
 
 
 size_t New::exe(Parser *parser) {
-    MetaData *item = new MetaData(parser -> getSeq(), parser -> getName());
+    MetaData *item = new MetaData(parser->getDetails(), parser -> getName());
     App::m_data.addDNA(item);
     return item->m_id;
 }

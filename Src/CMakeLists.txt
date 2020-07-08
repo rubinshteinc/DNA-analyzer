@@ -10,7 +10,10 @@ add_executable(Src
         parsing.h parsing.cpp
         Command/factory_command.h Command/factoryCommand.cpp
         Command/Icommand.h
-        Command/new_command.h Command/new_command.cpp
+        Command/New/new_command.h Command/New/new_command.cpp
+        Command/Load/load_command.h Command/Load/load_command.cpp
+        Command/Load/load_parser.h Command/Load/load_parser.cpp
+        Command/New/new_parser.h Command/New/new_parser.cpp
         Data/dna.h
         Data/dna_sequence.cpp
         Data/meta_data.h Data/meta_data.cpp

@@ -2,7 +2,7 @@
 #define DNA___ANALYZER_NEW_COMMAND_H
 
 #include <cstdlib>
-#include "Icommand.h"
+#include "../Icommand.h"
 
 class Parser;
 
