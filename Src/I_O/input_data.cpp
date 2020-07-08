@@ -1,9 +1,10 @@
 #include "input_data.h"
 #include <fstream>
 #include <iostream>
-InputFile::InputFile(const char *fileName): m_fileName(fileName){}
 
-std::string InputFile::readData()
+FileReader::FileReader(const char *fileName): m_fileName(fileName){}
+
+std::string FileReader::readData()
 {
     std::string data;
     std::ifstream file((char*)(m_fileName));
@@ -19,7 +20,7 @@ std::string InputFile::readData()
 }
 
 
-std::string InputConsole::readData(){
+std::string ConsuleReader::readData(){
     std::string data;
     getline(std::cin , data);
     return data;

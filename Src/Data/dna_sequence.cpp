@@ -26,11 +26,12 @@ DNASeq::DNASeq(const std::string& sequence):m_DNASequence(NULL)
     init(sequence.c_str());
 }
 
-//DNASeq::DNASeq(Input *input):m_DNASequence(NULL){
+//DNASeq::DNASeq(IReader *input):m_DNASequence(NULL){
 //    const char *sequence = input->readData();
 //    init(sequence);
 //}
 //
+
 //DNASeq::DNASeq(const DNASeq &sequence):m_DNASequence(NULL)
 //{
 //    m_DNASequence =  new Nucleotide[sequence.m_length + 1];
@@ -45,11 +46,13 @@ DNASeq::DNASeq(const std::string& sequence):m_DNASequence(NULL)
 //    m_length = size;
 //}
 //
+
 DNASeq::~DNASeq() {
     delete[](m_DNASequence);
     m_DNASequence = NULL;
 
 }
+
 //
 //void DNASeq::writeDNADataToFile(const char* fileName)
 //{
@@ -173,6 +176,7 @@ DNASeq::~DNASeq() {
 //        return res;
 //}
 //
+
 void DNASeq::init(const char *sequence)
 {
     if(!isValid(sequence))
@@ -241,13 +245,13 @@ char DNASeq::Nucleotide::getStrand()const
         case 'C':return 'G';
         case 'G':return 'C';
     }
-    return 'j';
+    return '\0';
 }
 
-DNASeq::Nucleotide::Nucleotide(const char ch):m_nucleotide(ch)
-{
-//    std::cout << m_nucleotide << "\n";
+DNASeq::Nucleotide::Nucleotide(const char ch):m_nucleotide(ch){
+
 }
+
 
 //DNASeq::Nucleotide& DNASeq::Nucleotide::operator= (char ch)
 //{
@@ -255,4 +259,4 @@ DNASeq::Nucleotide::Nucleotide(const char ch):m_nucleotide(ch)
 //        m_nucleotide = ch;
 //    return *this;
 //}
-//
+

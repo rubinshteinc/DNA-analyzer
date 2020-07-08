@@ -1,4 +1,4 @@
 \rm a.out
-g++ -ansi -pedantic -Wall -Wconversion -std=c++98 main.cpp output_data.cpp input_data.cpp dna_sequence.cpp app.cpp factoryCommand.cpp meta_data.cpp new_command.cpp terminal.cpp
+g++ -ansi -pedantic -Wall -Wconversion -std=c++98 main.cpp app.cpp terminal.cpp parsing.cpp I_O/output_data.cpp I_O/input_data.cpp Data/dna_sequence.cpp  Data/meta_data.cpp Command/factoryCommand.cpp  Command/new_command.cpp
 ./a.out
 

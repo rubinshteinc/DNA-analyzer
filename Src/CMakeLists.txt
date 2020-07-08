@@ -3,18 +3,19 @@ project(DNA___analyzer)
 
 set(CMAKE_CXX_STANDARD 98)
 
-add_executable(DNA___analyzer main.cpp
+add_executable(Src
+        main.cpp
         app.h app.cpp
         terminal.h terminal.cpp
-        meta_data.h meta_data.cpp
         parsing.h parsing.cpp
-        factory_command.h factoryCommand.cpp
-        Icommand.h
-        new_command.h new_command.cpp
-        dna.h
-        input_data.cpp
-        input_data.h
-        output_data.cpp
-        output_data.h
-        dna_sequence.cpp
+        Command/factory_command.h Command/factoryCommand.cpp
+        Command/Icommand.h
+        Command/new_command.h Command/new_command.cpp
+        Data/dna.h
+        Data/dna_sequence.cpp
+        Data/meta_data.h Data/meta_data.cpp
+        I_O/output_data.cpp
+        I_O/output_data.h
+        I_O/input_data.cpp
+        I_O/input_data.h
         )

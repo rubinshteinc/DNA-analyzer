@@ -1,29 +1,40 @@
+#include "app.h"
 #include "terminal.h"
 #include "parsing.h"
-#include "factory_command.h"
-#include "Icommand.h"
-#include "input_data.h"
-#include "output_data.h"
+#include "Command/factory_command.h"
+#include "I_O/input_data.h"
+#include "I_O/output_data.h"
+
+std::string Terminal::m_prompt = "> cmd >>> ";
+
+Terminal::Terminal(IReader *pReader, IWriter *pWriter):m_pIReader(pReader), m_IWriter(pWriter){
+}
+
 
 void Terminal::run()
 {
-    std::string prompt = "cmd >>";
     bool flag = true;
     Parser parser;
     ICommand *command;
-    Input *reader = reinterpret_cast<Input *>(new InputConsole);
-    IOutput *writer = reinterpret_cast<IOutput *>(new OutputConsole);
-    std::string input;
-    MetaData *data;
+    std::string cmd;
+    size_t id;
     while(flag){
-        writer -> write(prompt);
-        parser.parserInput(reader -> readData());
-        command = FactoryCLI::managementCLI(parser);
-        data = command -> exe(parser);
-//        std::cout << "[" << data->m_id << "]";
-//        std::cout << data -> m_seq;
-//        std::cout << data -> m_name;
-        delete command;
+        m_IWriter -> write(m_prompt);
+        cmd = m_pIReader -> readData();
+        parser.parserInput(cmd);
+        command = FactoryCLI::managementCLI(&parser);
+        try{
+            if(!command){
+                flag = false;
+                continue;
+            }
+           id = command -> exe(&parser);
+           App::m_data.print(id);
+        }
+       catch(...){
+           //complete
+       }
+       delete command;
     }
 
 }

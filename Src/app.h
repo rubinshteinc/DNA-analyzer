@@ -1,17 +1,16 @@
 #ifndef DNA___ANALYZER_APP_H
 #define DNA___ANALYZER_APP_H
-#include "meta_data.h"
+#include "Data/meta_data.h"
 #include "terminal.h"
-#include <vector>
 
 class App{
 public:
-    ~App();
+    App(IReader *pr, IWriter *pw);
     void start();
-    const std::vector<MetaData*>* getData(){ return &m_data;}
-private:
-    std::vector<MetaData*> m_data;
+    static HashTableData m_data;
 
+private:
+    Terminal m_terminal;
 };
 
 #endif //DNA___ANALYZER_APP_H

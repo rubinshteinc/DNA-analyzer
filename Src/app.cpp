@@ -1,14 +1,12 @@
 #include "app.h"
-#include <iterator>
 
-void App::start() {
-    Terminal::run();
+HashTableData App::m_data;
+
+
+App::App(IReader *pr, IWriter *pw):m_terminal(pr, pw){
+
 }
 
-
-App::~App() {
-    std::vector<MetaData *>::iterator it = m_data.begin();
-    for (;it != m_data.end(); ++it) {
-        delete[] (*it);
-    }
+void App::start() {
+    m_terminal.run();
 }

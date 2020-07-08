@@ -5,8 +5,8 @@
 #include <iostream>
 #include <exception>
 #include <vector>
-#include "input_data.h"
-#include "output_data.h"
+#include "../I_O/input_data.h"
+#include "../I_O/output_data.h"
 class DNASeq {
 
 private:
@@ -37,6 +37,7 @@ public:
     DNASeq(const std::string &sequence);
     size_t getLength(){ return m_length;}
 //    DNASeq(const DNASeq &sequence);
+    const char* getSeq(){return reinterpret_cast<const char *>(m_DNASequence);}
     ~DNASeq();
 };
 
