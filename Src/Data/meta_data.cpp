@@ -2,14 +2,14 @@
 #include <iterator>
 size_t MetaData::idCount = 1;
 
-MetaData::MetaData(const std::string &seq, const std::string &name): m_name(name), m_id(idCount), m_seq(new DNASeq(seq)){
+MetaData::MetaData(const std::string &seq, const std::string &name):m_seq(new DNASeq(seq)), m_name(name), m_id(idCount){
     ++idCount;
 }
 
 
 MetaData::~MetaData(){
     delete m_seq;
-    std::cout << "Dtor MetaData..." << std::endl;
+//    std::cout << "Dtor MetaData..." << std::endl;
     m_seq = NULL;
 }
 

@@ -7,6 +7,9 @@ ICommand* FactoryCLI::managementCLI(Parser *parser) {
         if("new" == parser -> getCommand()){
             return new New(parser);
         }
+        if("load" == parser -> getCommand()){
+            return new Load(parser);
+        }
     }
     catch (std::invalid_argument&e){
         throw ;}

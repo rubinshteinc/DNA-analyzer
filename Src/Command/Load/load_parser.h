@@ -7,7 +7,5 @@ public:
     bool properCommand();
     void prepareCommand();
 
-private:
-    static size_t countName;
 };
 #endif //DNA___ANALYZER_LOAD_PARSER_H

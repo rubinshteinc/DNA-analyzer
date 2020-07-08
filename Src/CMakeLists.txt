@@ -21,4 +21,4 @@ add_executable(Src
         I_O/output_data.h
         I_O/input_data.cpp
         I_O/input_data.h
-        )
+        Command/New/save_command.cpp Command/New/save_command.h)

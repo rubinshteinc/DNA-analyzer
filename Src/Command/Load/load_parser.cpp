@@ -1,9 +1,7 @@
 #include "load_parser.h"
-#include <exception>
 #include <stdexcept>
 #include <sstream>
 
-size_t LoadParser::countName = 1;
 
 bool LoadParser::properCommand(){
     if(m_params.size() < 2 or m_params.size() > 3){
@@ -19,10 +17,9 @@ bool LoadParser::properCommand(){
 
 void LoadParser::prepareCommand(){
     if(m_params.size() == 2) {
-        std::stringstream defaultName;
-        defaultName << "seq" << countName;
+        std::ostringstream defaultName;
+        defaultName << (m_params[1].substr(0, m_params[1].find(".")));
         m_params.push_back(defaultName.str());
-        ++countName;
     }
     else{
         m_params[2] = m_params[2].substr(1);
