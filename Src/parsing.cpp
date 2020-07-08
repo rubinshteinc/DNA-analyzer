@@ -12,7 +12,15 @@ void Parser::parserInput(std::string &cmd){
 }
 
 bool NewParser::properCommand(){
-    return !((m_params.size() < 2 or m_params.size() > 3) or (m_params[2].find('@') == std::string::npos));
+    if(m_params.size() < 2 or m_params.size() > 3){
+        return false;
+    }
+    if(m_params.size() == 3) {
+        if (m_params[2].find('@') == std::string::npos) {
+            throw std::invalid_argument("OOppps! Wrong Name... Did you forgot sign \"@\"??");
+        }
+    }
+    return true;
 }
 
 void NewParser::prepareCommand(){

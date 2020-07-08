@@ -1,9 +1,14 @@
 #include "factory_command.h"
 #include "../parsing.h"
+#include <stdexcept>
 
 ICommand* FactoryCLI::managementCLI(Parser *parser) {
-    if("new" == parser -> getCommand()){
-        return new New(parser);
+    try{
+        if("new" == parser -> getCommand()){
+            return new New(parser);
+        }
     }
-    return NULL;
+    catch (std::invalid_argument&e){
+        throw ;}
+    throw std::invalid_argument("OOppps! Wrong command");
 }

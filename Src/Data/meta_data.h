@@ -7,6 +7,7 @@
 class MetaData{
 public:
     MetaData(const std::string &seq, const std::string &name);
+    ~MetaData();
     static size_t idCount;
     DNASeq *m_seq;
     std::string m_name;
@@ -17,6 +18,7 @@ public:
 class HashTableData{
 public:
 
+    ~HashTableData();
     //    MetaData* getDNAByName(std::string &name){ return m_HashTableId[id];}
     void addDNA(MetaData* DNA){m_HashTableId.insert(PairHashTableId(DNA->m_id, DNA));
                                 m_hashTableName.insert(PairHashTableName(DNA ->m_name, DNA -> m_id));}

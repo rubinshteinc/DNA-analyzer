@@ -21,18 +21,20 @@ void Terminal::run()
     while(flag){
         m_IWriter -> write(m_prompt);
         cmd = m_pIReader -> readData();
+
+        if(cmd == "exit"){
+            flag = false;
+            continue;
+        }
         parser.parserInput(cmd);
-        command = FactoryCLI::managementCLI(&parser);
+
         try{
-            if(!command){
-                flag = false;
-                continue;
-            }
+            command = FactoryCLI::managementCLI(&parser);
            id = command -> exe(&parser);
            App::m_data.print(id);
         }
-       catch(...){
-           //complete
+       catch(const std::exception &e){
+           std::cout << e.what() << std::endl;
        }
        delete command;
     }

@@ -2,7 +2,7 @@
 #define DNA___ANALYZER_APP_H
 #include "Data/meta_data.h"
 #include "terminal.h"
-
+#include <exception>
 class App{
 public:
     App(IReader *pr, IWriter *pw);
