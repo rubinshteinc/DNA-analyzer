@@ -25,6 +25,7 @@
 //    return int(&lhs - &rhs);
 //}
 //
+
 DNASeq::DNASeq(const char *sequence):m_DNASequence(NULL)
 {
     init(sequence);
@@ -44,17 +45,22 @@ DNASeq::DNASeq(const std::string& sequence):m_DNASequence(NULL)
 //DNASeq::DNASeq(const DNASeq &sequence):m_DNASequence(NULL)
 //{
 //    m_DNASequence =  new Nucleotide[sequence.m_length + 1];
-//    for(unsigned int i = 0; i < sequence.m_length; ++i)
+//    unsigned int i;
+//    for(i = 0; i < sequence.m_length; ++i)
 //        m_DNASequence[i] = sequence[i];
+//    m_DNASequence[i] = '\0';
+//
 //    m_length = sequence.m_length;
 //}
-//
-//DNASeq::DNASeq(size_t size)
-//{
-//    m_DNASequence = new Nucleotide[size];
-//    m_length = size;
-//}
-//
+
+
+
+DNASeq::DNASeq(size_t size)
+{
+    m_DNASequence = new Nucleotide[size];
+    m_length = size;
+}
+
 
 DNASeq::~DNASeq() {
     delete[](m_DNASequence);
@@ -72,28 +78,29 @@ DNASeq::~DNASeq() {
 //    DNAFile.close();
 //}
 //
-//
-//DNASeq& DNASeq::operator=(const DNASeq &other)
-//{
-//    if (this != &other)
-//    {
-//        Nucleotide *newDNASeq =  new Nucleotide[other.getLength()];
-//        for(unsigned int i = 0; i < other.m_length; ++i)
-//            newDNASeq[i].m_nucleotide = other[i];
-//        delete[] m_DNASequence;
-//        m_DNASequence = newDNASeq;
-//        m_length = other.getLength();
-//    }
-//    return *this;
-//}
-//
-//DNASeq::Nucleotide& DNASeq::operator[](size_t index)const
-//{
-//    if (index >= m_length)
-//        throw std::length_error("The index out of range");
-//    return m_DNASequence[index];
-//}
-//
+
+DNASeq& DNASeq::operator=(const DNASeq &other){
+    if (this != &other)
+    {
+        Nucleotide *newDNASeq =  new Nucleotide[other.getLength() + 1];
+        for(unsigned int i = 0; i < other.m_length; ++i)
+            newDNASeq[i].m_nucleotide = other[i];
+        newDNASeq[other.m_length].m_nucleotide = '\0';
+
+        delete[] m_DNASequence;
+        m_DNASequence = newDNASeq;
+        m_length = other.getLength();
+    }
+    return *this;
+}
+
+DNASeq::Nucleotide& DNASeq::operator[](size_t index)const
+{
+    if (index >= m_length)
+        throw std::length_error("The index out of range");
+    return m_DNASequence[index];
+}
+
 //std::ostream& operator<<(std::ostream &os, DNASeq &sequence)
 //{
 //    for (unsigned i = 0; i < sequence.m_length; ++i)
@@ -102,15 +109,19 @@ DNASeq::~DNASeq() {
 //}
 //
 //
-//DNASeq DNASeq::slice(size_t startIndex, size_t endIndex)const
-//{
-//    DNASeq seq(endIndex - startIndex);
-//
-//    for (size_t j = 0, i = startIndex; i < endIndex; ++i, ++j)
-//        seq.m_DNASequence[j] = m_DNASequence[i];
-//
-//    return seq;
-//}
+
+
+DNASeq DNASeq::slice(size_t startIndex, size_t endIndex)const
+{
+    DNASeq seq(endIndex - startIndex + 1);
+    size_t j, i;
+    for (j = 0, i = startIndex; i < endIndex; ++i, ++j)
+        seq.m_DNASequence[j] = m_DNASequence[i];
+
+    seq.m_DNASequence[j] = '\0';
+
+    return seq;
+}
 //
 //DNASeq DNASeq::getPairedStrand()const
 //{
@@ -190,10 +201,14 @@ void DNASeq::init(const char *sequence)
 {
     if(!isValid(sequence))
         throw std::invalid_argument("The DNASeq sequence is NOT valid!");
-    m_DNASequence =  new Nucleotide[strlen(sequence)];
+
+    size_t i;
+    m_DNASequence =  new Nucleotide[strlen(sequence) + 1];
     m_length = strlen(sequence);
-    for(unsigned int i = 0; i < m_length; ++i)
+    for(i = 0; i < m_length; ++i)
         m_DNASequence[i] = sequence[i];
+
+    m_DNASequence[i] = '\0';
 }
 
 bool DNASeq::isValid(const char *sequence)
@@ -245,6 +260,8 @@ bool DNASeq::isValid(char ch)
 //}
 //
 //
+
+
 char DNASeq::Nucleotide::getStrand()const
 {
     switch(m_nucleotide)
@@ -268,4 +285,3 @@ DNASeq::Nucleotide::Nucleotide(const char ch):m_nucleotide(ch){
 //        m_nucleotide = ch;
 //    return *this;
 //}
-

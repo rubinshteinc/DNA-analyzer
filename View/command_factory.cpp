@@ -4,14 +4,16 @@
 
 #include "command_factory.h"
 #include "../Controller/creation/new.h"
+#include "../Controller/creation/load.h"
+#include "../Controller/creation/dup.h"
 
 
 //std::map<std::string, SharedPtr<ICommand> > CommandCollection::_commands = initializedCommands();
-SharedPtr<CommandCollection> CommandCollection::_pObj;
+CommandCollection* CommandCollection::_pObj;
 
-const SharedPtr<CommandCollection>& CommandCollection::getCommandsInstance(){
+CommandCollection* & CommandCollection::getCommandsInstance(){
     if (!_pObj){
-        _pObj = SharedPtr<CommandCollection>(new CommandCollection);
+        _pObj = new CommandCollection;
     }
 
     return _pObj;
@@ -33,8 +35,14 @@ const SharedPtr<CommandCollection>& CommandCollection::getCommandsInstance(){
 
 CommandCollection::CommandCollection() {
 
-    SharedPtr<NewCommand> cnew(new NewCommand);
+    NewCommand *cnew(new NewCommand);
     _commands.insert(std::make_pair("new", cnew));
+
+    LoadCommand *cload(new LoadCommand);
+    _commands.insert(std::make_pair("load", cload));
+
+    DupCommand *cdup(new DupCommand);
+    _commands.insert(std::make_pair("dup", cdup));
 }
 
 

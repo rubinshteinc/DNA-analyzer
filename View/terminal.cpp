@@ -35,14 +35,20 @@ void Terminal::run() {
 void Terminal::command() {
     std::string cmd;
     getline(std::cin , cmd);
+
+    if(isEmpty(cmd)){
+        return;
+    }
+
     Args args(cmd);
-    size_t DNAIDResult;
+    std::string commandResult;
     
-    SharedPtr<ICommand> command = _pFactory -> getCommand(args.getCommandName());
+    ICommand *command = _pFactory -> getCommand(args.getCommandName());
 
     if(command){
-        DNAIDResult = command -> execute(args);
-        print(DNAIDResult);
+
+        commandResult = command -> execute(args);
+        printResult(commandResult);
     }
 
     else{
@@ -53,9 +59,6 @@ void Terminal::command() {
 
 }
 
-void Terminal::print(size_t DNAID) const{
-    std::cout << "[" << DNAID << "] ";
-    std::cout << DNACollection::getNameById(DNAID) << ": ";
-
-    std::cout << DNACollection::getSeqById(DNAID) -> getSequence() << std::endl;
+void Terminal::printResult(const std::string & res) const{
+    std::cout << res << std::endl;
 }

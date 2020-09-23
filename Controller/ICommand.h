@@ -13,7 +13,7 @@
 class ICommand{
 public:
     virtual ~ICommand(){}
-    virtual size_t execute(Args &args) = 0;
+    virtual std::string execute(Args &args) = 0;
 };
 
 

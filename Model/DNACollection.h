@@ -8,19 +8,20 @@
 #include <map>
 #include <cstddef>
 #include "MetaData.h"
-#include "../Smart Pointers/Shared Ptr/shared_ptr.h"
 
 class DNACollection{
 public:
-    static void addDNA(SharedPtr<MetaData> &DNA);
+    static void addDNA(MetaData *DNA);
     static std::string getNameById(size_t id);
     static DNASeq* getSeqById(size_t id);
+    static bool isExist(const std::string &name);
+    static bool availableID(size_t id);
 
 
 private:
 
     static std::map<std::string, size_t> _nameToId;
-    static std::map<size_t, SharedPtr<MetaData> > _idToData;
+    static std::map<size_t, MetaData*> _idToData;
 };
 
 

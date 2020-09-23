@@ -6,7 +6,6 @@
 #define DNA_ANALYZER_TERMINAL_H
 
 #include <string>
-#include "../Smart Pointers/Shared Ptr/shared_ptr.h"
 #include "command_factory.h"
 
 
@@ -15,12 +14,16 @@ public:
     Terminal();
     void run();
     void command();
-    void print(size_t DNAID) const;
+    void printResult(const std::string &res) const;
+    bool isEmpty(const std::string &str) const;
 
 private:
     static std::string _prompt;
-    SharedPtr<CommandCollection> _pFactory;
+    CommandCollection *_pFactory;
 };
 
+inline bool Terminal::isEmpty(const std::string &str) const{
+    return str.empty();
+}
 
 #endif //DNA_ANALYZER_TERMINAL_H

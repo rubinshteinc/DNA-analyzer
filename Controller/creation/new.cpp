@@ -2,7 +2,6 @@
 // Created by a on 9/16/20.
 //
 
-#include <iostream>
 #include <sstream>
 #include "new.h"
 #include "../../View/Args.h"
@@ -32,9 +31,9 @@ void NewCommand::extractName(Args &args){
 }
 
 
-SharedPtr<MetaData> NewCommand::createDNA(const std::string& DNAseq, const std::string &name) const{
+MetaData* NewCommand::createDNA(const std::string& DNAseq, const std::string &name) const{
     try{
-        return SharedPtr<MetaData> (new MetaData(DNAseq, name));
+        return new MetaData(DNAseq, name);
     }
 
     catch (std::invalid_argument &exp){
@@ -44,18 +43,20 @@ SharedPtr<MetaData> NewCommand::createDNA(const std::string& DNAseq, const std::
 }
 
 
-size_t NewCommand::execute(Args &args){
+std::string NewCommand::execute(Args &args){
 
+    std::string result;
     if(args.size() == 1){
         throw std::invalid_argument("Missing arguments");
     }
 
-    //TODO לשנות את השימוש ב DNACOLLECTION וב- COMMANDCOLLECTION לשימוש ב SINGELTON
     extractName(args);
-    SharedPtr<MetaData> newDNA = createDNA(args.getSeq(), args.getName());
+    MetaData *newDNA = createDNA(args.getSeq(), args.getName());
     DNACollection::addDNA(newDNA);
 
-    return newDNA -> getID();
+    result = '[' + newDNA -> getIDAsStr() + "] " + newDNA -> getName() + ": " + newDNA -> getSeqAsStr();
+
+    return result;
 }
 
 
