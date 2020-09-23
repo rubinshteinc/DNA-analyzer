@@ -6,6 +6,7 @@
 #include "../Controller/creation/new.h"
 #include "../Controller/creation/load.h"
 #include "../Controller/creation/dup.h"
+#include "../Controller/analysis/len.h"
 
 
 //std::map<std::string, SharedPtr<ICommand> > CommandCollection::_commands = initializedCommands();
@@ -43,6 +44,9 @@ CommandCollection::CommandCollection() {
 
     DupCommand *cdup(new DupCommand);
     _commands.insert(std::make_pair("dup", cdup));
+
+    LenCommand *clen(new LenCommand);
+    _commands.insert(std::make_pair("len", clen));
 }
 
 

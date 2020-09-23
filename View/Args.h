@@ -39,10 +39,9 @@ inline const std::string& Args::getCommandName() const{
 inline size_t Args::size() const{
     return _arguments.size();
 }
-//TODO לבדוק אם זה לא שגיאה
+
 inline void Args::pushName(size_t pos, const std::string &name){
     std::vector<std::string>::iterator it = _arguments.begin() + pos;
-//    _arguments[NAME] = name;
     _arguments.insert(it, name);
 }
 
